@@ -12,13 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.label :group_id, style: "display: block" %>
-    <%= form.text_field :group_id %>
+    <%= form.label :group_id, "Group", style: "display: block" %>
+    <%= form.collection_select :group_id, Group.all, :id, :name, prompt: "選択してください" %>
   </div>
 
   <div>
-    <%= form.label :payer_id, style: "display: block" %>
-    <%= form.text_field :payer_id %>
+    <%= form.label :payer_id, "Payer", style: "display: block" %>
+    <%= form.collection_select :payer_id, User.all, :id, :name, prompt: "選択してください" %>
   </div>
 
   <div>
