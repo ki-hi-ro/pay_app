@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group: one
+  payer: one
+  amount: 1
+  description: MyString
+
+two:
+  group: two
+  payer: two
+  amount: 1
+  description: MyString
