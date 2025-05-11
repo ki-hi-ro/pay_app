@@ -63,10 +63,12 @@ class DebtsController < ApplicationController
   end  
 
   def update_multiple
-    params[:debts].each do |id, attributes|
+    (params[:debts] || {}).each do |id, attributes|
       debt = Debt.find(id)
-      debt.update(attributes.permit(:paid))
+      paid = ActiveModel::Type::Boolean.new.cast(attributes[:paid])
+      debt.update(paid: paid)
     end
+  
     redirect_to payments_path, notice: "返済状況を更新しました。"
   end  
 

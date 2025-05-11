@@ -5,6 +5,7 @@
     <% checkbox_id = "debt_#{debt.id}_paid" %>
     <p>
       <%= debt.from_user.name %>さん（¥<%= number_with_delimiter(debt.amount.to_i) %>）：
+      <%= hidden_field_tag "debts[#{debt.id}][paid]", "0" %>
       <%= check_box_tag "debts[#{debt.id}][paid]", "1", debt.paid, id: checkbox_id %>
       <%= label_tag checkbox_id, "返済済み" %>
     </p>
