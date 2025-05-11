@@ -4,10 +4,12 @@
   <p style="color: green;"><%= notice %></p>
 <% end %>
 
-<div id="payments">
-  <% @payments.each do |payment| %>
-    <%= render payment %>
-  <% end %>
+<div style="max-width: 700px; box-sizing: border-box;">
+  <div id="payments">
+    <% @payments.each do |payment| %>
+      <%= render payment %>
+    <% end %>
+  </div>
 </div>
 
 <%= link_to "支払い登録", new_payment_path %>

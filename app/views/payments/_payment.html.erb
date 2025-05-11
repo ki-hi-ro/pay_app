@@ -1,15 +1,15 @@
-<div id="<%= dom_id payment %>">
-  <h2><%= payment.description %></h2>
+<div style="border: 1px solid #ccc; padding: 1em; margin-bottom: 2em; border-radius: 8px; max-width: 600px; width: 100%; box-sizing: border-box;">
+  <h3 style="margin-top: 0;"><%= payment.description %></h3>
 
-  <p>
+  <p style="margin-bottom: 0.5em;">
     <%= payment.payer.name %>さんが ¥<%= number_with_delimiter(payment.amount.to_i) %> を立て替えました。
   </p>
-  
-  <p>
+
+  <p style="margin-bottom: 0.5em;">
     返済するのは以下の<%= payment.debts.size %>人です：
   </p>
 
-  <ul>
+  <ul style="margin-left: 1em; margin-bottom: 1em;">
     <% payment.debts.each do |debt| %>
       <li>
         <% if debt.paid? %>
@@ -22,15 +22,15 @@
     <% end %>
   </ul>
 
-  <p>
-    返済操作:
-    <%= link_to "返済登録", edit_debts_payment_path(payment) %>
-  </p>
-
-  <p>
-    支払い管理:
-    <%= link_to "編集", edit_payment_path(payment) %> |
-    <%= link_to "削除", payment_path(payment), method: :delete, data: { turbo_method: :delete, confirm: "本当に削除しますか？" } %>
-  </p>
-
+  <div style="display: flex; justify-content: space-between; align-items: center; gap: 1em; flex-wrap: wrap;">
+    <div>
+      <strong>返済操作:</strong>
+      <%= link_to "返済登録", edit_debts_payment_path(payment) %>
+    </div>
+    <div>
+      <strong>支払い管理:</strong>
+      <%= link_to "編集", edit_payment_path(payment) %> |
+      <%= link_to "削除", payment_path(payment), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+    </div>
+  </div>
 </div>

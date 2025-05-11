@@ -1,9 +1,9 @@
-<h1>支払いの編集</h1>
+<h1 style="margin-bottom: 1.5em;">支払いの編集</h1>
 
-<%= render "form", payment: @payment %>
+<div style="padding: 1.5em; border: 1px solid #ccc; border-radius: 8px; max-width: 600px;">
+  <%= render "form", payment: @payment %>
+</div>
 
-<br>
-
-<div>
-  <%= link_to "支払い履歴", payments_path %>
+<div style="margin-top: 2em;">
+  <%= link_to "← 支払い履歴に戻る", payments_path %>
 </div>
