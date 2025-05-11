@@ -30,7 +30,7 @@
     <div>
       <strong>支払い管理:</strong>
       <%= link_to "編集", edit_payment_path(payment) %> |
-      <%= link_to "削除", payment_path(payment), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <%= link_to "削除", payment_path(payment), method: :delete, data: { turbo_method: :delete, confirm: "本当に削除しますか？" } %>
     </div>
   </div>
 </div>

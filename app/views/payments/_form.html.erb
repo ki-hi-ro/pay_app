@@ -10,34 +10,38 @@
     </div>
   <% end %>
 
-  <div style="margin-bottom: 1.5em;">
-    <%= form.label :payer_id, "支払った人", style: "display: block" %>
-    <%= form.collection_select :payer_id, User.all, :id, :name, { prompt: "選択してください" }, { id: "payer_select" } %>
-  </div>
+  <div style="padding: 1.5em; border: 1px solid #ccc; border-radius: 8px; max-width: 600px;">
 
-  <div style="margin-bottom: 1.5em;">
-    <%= form.label :debtor_ids, "返済する人", style: "display: block" %>
-    <div style="display: flex; flex-wrap: wrap; gap: 1em; margin-top: 0.5em;">
-      <% User.all.each do |user| %>
-        <div style="display: flex; align-items: center;">
-          <%= check_box_tag "payment[debtor_ids][]", user.id, false, id: "debtor_#{user.id}", class: "debtor_checkbox" %>
-          <%= label_tag "debtor_#{user.id}", user.name, style: "margin-left: 0.25em;" %>
-        </div>
-      <% end %>
+    <div style="margin-bottom: 1.5em;">
+      <%= form.label :payer_id, "支払った人", style: "display: block" %>
+      <%= form.collection_select :payer_id, User.all, :id, :name, { prompt: "選択してください" }, { id: "payer_select" } %>
     </div>
-  </div>
 
-  <div style="margin-bottom: 1.5em;">
-    <%= form.label :amount, "支払額", style: "display: block" %>
-    <%= form.number_field :amount %>
-  </div>
+    <div style="margin-bottom: 1.5em;">
+      <%= form.label :debtor_ids, "返済する人", style: "display: block" %>
+      <div style="display: flex; flex-wrap: wrap; gap: 1em; margin-top: 0.5em;">
+        <% User.all.each do |user| %>
+          <div style="display: flex; align-items: center;">
+            <%= check_box_tag "payment[debtor_ids][]", user.id, false, id: "debtor_#{user.id}", class: "debtor_checkbox" %>
+            <%= label_tag "debtor_#{user.id}", user.name, style: "margin-left: 0.25em;" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-  <div style="margin-bottom: 1.5em;">
-    <%= form.label :description, "支払い内容", style: "display: block" %>
-    <%= form.text_area :description, rows: 4, style: "width: 100%;" %>
-  </div>
+    <div style="margin-bottom: 1.5em;">
+      <%= form.label :amount, "支払額", style: "display: block" %>
+      <%= form.number_field :amount %>
+    </div>
 
-  <div style="margin-top: 1em;">
-    <%= form.submit "登録する", class: "btn btn-primary" %>
+    <div style="margin-bottom: 1.5em;">
+      <%= form.label :description, "支払い内容", style: "display: block" %>
+      <%= form.text_area :description, rows: 4, style: "width: 100%; max-width: 600px; box-sizing: border-box;" %>
+    </div>
+
+    <div style="margin-top: 1em;">
+      <%= form.submit "登録する", class: "btn btn-primary" %>
+    </div>
+
   </div>
 <% end %>
