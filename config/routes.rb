@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post   '/login',  to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  get '/payments', to: redirect('/')
+
   # 支払い・返済
   resources :payments do
     member do
