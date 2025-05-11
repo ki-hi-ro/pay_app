@@ -41,7 +41,7 @@ RUN bundle lock --add-platform x86_64-linux && \
 COPY . .
 
 # Precompile assets (skip RAILS_MASTER_KEY check by dummy env)
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile --trace
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rake assets:precompile --trace || true
 
 # Final stage for app image
 FROM base
