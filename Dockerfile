@@ -31,8 +31,9 @@ RUN gem update --system 3.4.10 && \
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 
-# ✅ Linuxプラットフォームを明示してnokogiriなどのネイティブgem問題を防ぐ
+# ✅ Linuxプラットフォームを明示し、nokogiri を system libraries でビルド
 RUN bundle lock --add-platform x86_64-linux && \
+    bundle config set build.nokogiri --use-system-libraries && \
     bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
