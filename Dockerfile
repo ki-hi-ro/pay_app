@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.1.2
+ARG RUBY_VERSION=3.1.7
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here
@@ -16,6 +16,9 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
+# ⚠️ デプロイメントモードを解除
+ENV BUNDLE_DEPLOYMENT="false"
+
 # Update RubyGems and install packages needed to build gems
 RUN gem update --system 3.4.10 && \
     apt-get update -qq && \
@@ -26,7 +29,8 @@ RUN gem update --system 3.4.10 && \
     libvips \
     pkg-config \
     libxml2-dev \
-    libxslt-dev
+    libxslt-dev \
+    libyaml-dev
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./

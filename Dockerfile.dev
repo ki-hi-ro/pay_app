@@ -1,0 +1,25 @@
+FROM ruby:3.1.7
+
+# 基本パッケージのインストール
+RUN apt-get update -qq && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    nodejs \
+    yarn \
+    curl
+
+# 作業ディレクトリ作成
+WORKDIR /app
+
+# Gemfile系コピー＆インストール
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# アプリコードをコピー
+COPY . .
+
+# ポート開放
+EXPOSE 3000
+
+# サーバ起動コマンド（外部アクセス可能にする）
+CMD ["rails", "server", "-b", "0.0.0.0"]
