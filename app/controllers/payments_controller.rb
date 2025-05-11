@@ -41,7 +41,9 @@ class PaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @payment.update(payment_params)
-        format.html { redirect_to @payment, notice: "支払いが更新されました。" }
+        format.html {
+          redirect_to payments_path, status: :see_other, notice: "支払いが更新されました。"
+        }
         format.json { render :show, status: :ok, location: @payment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,12 +55,13 @@ class PaymentsController < ApplicationController
   # DELETE /payments/1 or /payments/1.json
   def destroy
     @payment.destroy!
-
     respond_to do |format|
-      format.html { redirect_to payments_path, status: :see_other, notice: "支払いが削除されました。" }
+      format.html {
+        redirect_to payments_path, status: :see_other, notice: "支払いが削除されました。"
+      }
       format.json { head :no_content }
     end
-  end
+  end  
 
   def payment_params
     params.require(:payment).permit(:group_id, :payer_id, :amount, :description, debtor_ids: [])
