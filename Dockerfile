@@ -50,7 +50,7 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
     curl \
     libvips \
-    postgresql-client && \
+    postgresql-client \
     libxml2 \
     libxslt1.1 && \ 
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
