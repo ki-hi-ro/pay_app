@@ -30,9 +30,8 @@ RUN gem update --system 3.4.10 && \
 COPY Gemfile Gemfile.lock ./
 
 # ✅ Linuxプラットフォームを明示してnokogiriなどのネイティブgem問題を防ぐ
-RUN bundle lock --add-platform x86_64-linux
-
-RUN bundle install && \
+RUN bundle lock --add-platform x86_64-linux && \
+    bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
 # Copy application code
