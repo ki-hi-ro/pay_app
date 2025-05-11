@@ -11,7 +11,7 @@
 
   <p>
     <strong>金額:</strong>
-    <%= payment.amount %>
+    <td><%= "¥#{number_with_delimiter(payment.amount.to_i)}" %></td>
   </p>
 
   <p>

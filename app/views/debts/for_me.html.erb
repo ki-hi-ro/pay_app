@@ -14,7 +14,7 @@
     <% @debts.each do |debt| %>
       <tr>
         <td><%= debt.to_user.name %></td>
-        <td><%= number_to_currency(debt.amount, unit: "¥") %></td>
+        <td><%= "¥#{number_with_delimiter(debt.amount.to_i)}" %></td>
         <td><%= debt.due_date %></td>
         <td>
           <%= form_with(model: debt, local: true, method: :patch) do |f| %>
