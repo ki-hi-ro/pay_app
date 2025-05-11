@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      payment: 支払い
+    attributes:
+      payment:
+        group: グループ
+        group_id: グループ
+        payer: 立て替えた人
+        payer_id: 立て替えた人
+        amount: 金額
+        description: 内容
+
+  helpers:
+    submit:
+      create: 作成する
+      update: 更新する
+      submit: 保存する

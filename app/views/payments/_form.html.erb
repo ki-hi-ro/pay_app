@@ -12,12 +12,12 @@
   <% end %>
 
   <div>
-    <%= form.label :group_id, "Group", style: "display: block" %>
+    <%= form.label :group_id, "項目", style: "display: block" %>
     <%= form.collection_select :group_id, Group.all, :id, :name, prompt: "選択してください" %>
   </div>
 
   <div>
-    <%= form.label :payer_id, "Payer", style: "display: block" %>
+    <%= form.label :payer_id, "立て替えた人", style: "display: block" %>
     <%= form.collection_select :payer_id, User.all, :id, :name, prompt: "選択してください" %>
   </div>
 

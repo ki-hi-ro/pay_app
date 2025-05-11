@@ -45,7 +45,7 @@ class DebtsController < ApplicationController
   def update
     respond_to do |format|
       if @debt.update(debt_params)
-        format.html { redirect_to @debt, notice: "Debt was successfully updated." }
+        format.html { redirect_to @debt, notice: "返済状況の更新に成功しました。" }
         format.json { render :show, status: :ok, location: @debt }
       else
         format.html { render :edit, status: :unprocessable_entity }

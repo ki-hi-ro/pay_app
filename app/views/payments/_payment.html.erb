@@ -1,22 +1,17 @@
 <div id="<%= dom_id payment %>">
   <p>
-    <strong>Group:</strong>
-    <%= payment.group_id %>
+    <strong>項目:</strong>
+    <%= payment.group.name %>
   </p>
 
   <p>
-    <strong>Payer:</strong>
-    <%= payment.payer_id %>
+    <strong>支払った人:</strong>
+    <%= payment.payer.name %>
   </p>
 
   <p>
-    <strong>Amount:</strong>
+    <strong>金額:</strong>
     <%= payment.amount %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= payment.description %>
   </p>
 
 </div>

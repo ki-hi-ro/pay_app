@@ -3,8 +3,8 @@
 <%= render @debt %>
 
 <div>
-  <%= link_to "Edit this debt", edit_debt_path(@debt) %> |
-  <%= link_to "Back to debts", debts_path %>
+  <%= link_to "編集", edit_debt_path(@debt) %> |
+  <%= link_to "返済予定一覧", debts_path %>
 
-  <%= button_to "Destroy this debt", @debt, method: :delete %>
+  <%= button_to "削除", @debt, method: :delete %>
 </div>
