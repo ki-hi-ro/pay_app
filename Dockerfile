@@ -51,6 +51,8 @@ RUN apt-get update -qq && \
     curl \
     libvips \
     postgresql-client && \
+    libxml2 \
+    libxslt1.1 && \ 
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
