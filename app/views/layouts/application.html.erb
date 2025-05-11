@@ -13,8 +13,14 @@
     <nav>
       <%= link_to "Payments", payments_path %> |
       <%= link_to "返済を受け取る", debts_path %> |
-      <%= link_to "返済する", for_me_debts_path %>      
-    </nav>    
+      <%= link_to "返済する", for_me_debts_path %> |
+      <% if current_user %>
+        <span>ログイン中: <%= current_user.name %></span>
+        <%= button_to "ログアウト", logout_path, method: :delete %>
+      <% else %>
+        <%= link_to "ログイン", login_path %>
+      <% end %>  
+    </nav>
     <%= yield %>
   </body>
 </html>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
   resources :debts do
     collection do
       get 'for_me'  # /debts/for_me にアクセスできるようにする
@@ -15,4 +18,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "payments#index"
+
+  # config/routes.rb
+  get '/login',  to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 end

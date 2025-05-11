@@ -1,0 +1,11 @@
+<!-- app/views/sessions/new.html.erb -->
+<h1>ユーザー選択ログイン</h1>
+
+<%= form_with url: login_path, method: :post do %>
+  <div>
+    <%= select_tag :user_id, options_from_collection_for_select(@users, :id, :name), prompt: "ユーザーを選択" %>
+  </div>
+  <div>
+    <%= submit_tag "ログイン" %>
+  </div>
+<% end %>
