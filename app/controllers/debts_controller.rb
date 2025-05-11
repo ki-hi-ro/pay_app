@@ -5,6 +5,12 @@ class DebtsController < ApplicationController
   def index
     # 自分が受け取る側の借金（＝自分が立て替えた分）
     @debts = Debt.includes(:from_user, :to_user).where(to_user: current_user).order(:due_date)
+  end
+
+  def for_me  # ← NEW!
+    @debts = Debt.includes(:from_user, :to_user)
+                 .where(from_user: current_user)
+                 .order(:due_date)
   end  
 
   # GET /debts/1 or /debts/1.json

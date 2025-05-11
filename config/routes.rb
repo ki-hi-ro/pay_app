@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :debts do
+    collection do
+      get 'for_me'  # /debts/for_me にアクセスできるようにする
+    end
+  end  
   resources :debts
   resources :payments
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

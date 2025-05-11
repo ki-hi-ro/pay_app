@@ -1,0 +1,27 @@
+<h1>自分が返済すべき借金一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>返済相手</th>
+      <th>金額</th>
+      <th>返済予定日</th>
+      <th>返済済み？</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @debts.each do |debt| %>
+      <tr>
+        <td><%= debt.to_user.name %></td>
+        <td><%= number_to_currency(debt.amount, unit: "¥") %></td>
+        <td><%= debt.due_date %></td>
+        <td>
+          <%= form_with(model: debt, local: true, method: :patch) do |f| %>
+            <%= f.check_box :paid, checked: debt.paid, onchange: 'this.form.submit()' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
