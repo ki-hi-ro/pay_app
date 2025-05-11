@@ -12,13 +12,20 @@
   <% end %>
 
   <div>
-    <%= form.label :group_id, "項目", style: "display: block" %>
-    <%= form.collection_select :group_id, Group.all, :id, :name, prompt: "選択してください" %>
+    <%= form.label :payer_id, "支払った人", style: "display: block" %>
+    <%= form.collection_select :payer_id, User.all, :id, :name, { prompt: "選択してください" }, { id: "payer_select" } %>
   </div>
 
   <div>
-    <%= form.label :payer_id, "立て替えた人", style: "display: block" %>
-    <%= form.collection_select :payer_id, User.all, :id, :name, prompt: "選択してください" %>
+    <%= form.label :debtor_ids, "返済する人", style: "display: block" %>
+    <div style="display: flex; flex-wrap: wrap; gap: 1em;">
+      <% User.all.each do |user| %>
+        <div style="display: flex; align-items: center;">
+          <%= check_box_tag "payment[debtor_ids][]", user.id, false, id: "debtor_#{user.id}", class: "debtor_checkbox" %>
+          <%= label_tag "debtor_#{user.id}", user.name, style: "margin-left: 0.25em;" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div>
@@ -28,7 +35,7 @@
 
   <div>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.text_area :description, rows: 4, cols: 60 %>
   </div>
 
   <div>

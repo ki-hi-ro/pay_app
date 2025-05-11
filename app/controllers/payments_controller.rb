@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    @payments = Payment.all
+    @payments = Payment.includes(debts: :from_user).all
   end
 
   # GET /payments/1 or /payments/1.json
@@ -22,10 +22,11 @@ class PaymentsController < ApplicationController
   # POST /payments or /payments.json
   def create
     @payment = Payment.new(payment_params)
+    @payment.debtor_ids = params[:payment][:debtor_ids]
 
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to @payment, notice: "Payment was successfully created." }
+        format.html { redirect_to @payment, notice: "新しい支払いが登録されました。" }
         format.json { render :show, status: :created, location: @payment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class PaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @payment.update(payment_params)
-        format.html { redirect_to @payment, notice: "Payment was successfully updated." }
+        format.html { redirect_to @payment, notice: "支払いが更新されました。" }
         format.json { render :show, status: :ok, location: @payment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +53,18 @@ class PaymentsController < ApplicationController
     @payment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to payments_path, status: :see_other, notice: "Payment was successfully destroyed." }
+      format.html { redirect_to payments_path, status: :see_other, notice: "支払いが削除されました。" }
       format.json { head :no_content }
     end
+  end
+
+  def payment_params
+    params.require(:payment).permit(:group_id, :payer_id, :amount, :description, debtor_ids: [])
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_payment
       @payment = Payment.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def payment_params
-      params.require(:payment).permit(:group_id, :payer_id, :amount, :description)
     end
 end

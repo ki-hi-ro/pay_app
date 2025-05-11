@@ -1,5 +1,6 @@
 class DebtsController < ApplicationController
   before_action :set_debt, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:for_me, :index]
 
   # GET /debts or /debts.json
   def index
@@ -7,11 +8,13 @@ class DebtsController < ApplicationController
     @debts = Debt.includes(:from_user, :to_user).where(to_user: current_user).order(:due_date)
   end
 
-  def for_me  # ← NEW!
-    @debts = Debt.includes(:from_user, :to_user)
-                 .where(from_user: current_user)
-                 .order(:due_date)
-  end  
+  def for_me
+    @debts = Debt
+      .includes(:from_user, :to_user)
+      .where(from_user_id: current_user.id)
+      .where.not(to_user_id: current_user.id)
+      .order(:due_date)
+  end
 
   # GET /debts/1 or /debts/1.json
   def show

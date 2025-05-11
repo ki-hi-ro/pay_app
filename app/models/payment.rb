@@ -1,26 +1,33 @@
 class Payment < ApplicationRecord
-  belongs_to :group
   belongs_to :payer, class_name: "User"
   has_many :debts, dependent: :destroy
+
+  attr_accessor :debtor_ids
 
   after_create :generate_debts
 
   private
 
   def generate_debts
-    # 支払者以外のグループメンバーを取得
-    debtors = group.users.where.not(id: payer.id)
-    # 一人あたりの金額を計算（整数切り捨て）
-    share_amount = amount / debtors.count
+    return if debtor_ids.nil?
 
-    debtors.each do |debtor|
+    selected_debtor_ids = debtor_ids.reject(&:blank?).map(&:to_i)
+
+    # 自分自身を除外（再発防止）
+    selected_debtor_ids -= [payer.id]
+    
+    return if selected_debtor_ids.empty?
+  
+    share = amount / selected_debtor_ids.size
+  
+    selected_debtor_ids.each do |user_id|
       debts.create!(
-        from_user: debtor,
+        from_user_id: user_id,
         to_user: payer,
-        amount: share_amount,
+        amount: share,
         paid: false,
-        due_date: Date.today + 7  # 仮の返済予定日（1週間後）
+        due_date: Date.today + 7
       )
     end
-  end  
+  end
 end

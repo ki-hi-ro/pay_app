@@ -1,17 +1,22 @@
 <div id="<%= dom_id payment %>">
   <p>
-    <strong>項目:</strong>
-    <%= payment.group.name %>
-  </p>
-
-  <p>
     <strong>支払った人:</strong>
     <%= payment.payer.name %>
+  </p>
+  
+  <p>
+    <strong>返済する人:</strong>
+    <%= payment.debts.map { |d| d.from_user.name }.join(", ") %>
   </p>
 
   <p>
     <strong>金額:</strong>
     <%= payment.amount %>
+  </p>
+
+  <p>
+    <strong>項目:</strong>
+    <%= payment.description %>
   </p>
 
 </div>

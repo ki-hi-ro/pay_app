@@ -16,14 +16,36 @@
     <nav>
       <%= link_to "支払い", payments_path %> |
       <%= link_to "返済を受け取る", debts_path %> |
-      <%= link_to "返済する", for_me_debts_path %> |
+      <%= link_to "返済する", for_me_debts_path %>
       <% if current_user %>
         <p>ログイン中：<strong><%= current_user.name %></strong></p>
         <%= link_to "ログアウト", logout_path, method: :delete, data: { turbo_method: :delete } %>
-      <% else %>
-        <%= link_to "ログイン", login_path %>
       <% end %>
     </nav>
     <%= yield %>
+  <script>
+    document.addEventListener("turbo:load", () => {
+      const payerSelect = document.getElementById("payer_select");
+      const debtorCheckboxes = document.querySelectorAll(".debtor_checkbox");
+
+      function updateDebtorCheckboxes() {
+        const selectedPayerId = payerSelect?.value;
+
+        debtorCheckboxes.forEach(checkbox => {
+          if (checkbox.value === selectedPayerId) {
+            checkbox.checked = false;
+            checkbox.disabled = true;
+          } else {
+            checkbox.disabled = false;
+          }
+        });
+      }
+
+      if (payerSelect) {
+        payerSelect.addEventListener("change", updateDebtorCheckboxes);
+        updateDebtorCheckboxes();
+      }
+    });
+  </script>
   </body>
 </html>

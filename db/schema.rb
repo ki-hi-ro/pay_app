@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_10_150003) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_11_043157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,13 +44,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_10_150003) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.bigint "group_id", null: false
     t.bigint "payer_id"
     t.integer "amount"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_payments_on_group_id"
     t.index ["payer_id"], name: "index_payments_on_payer_id"
   end
 
@@ -65,6 +63,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_10_150003) do
   add_foreign_key "debts", "users", column: "to_user_id"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
-  add_foreign_key "payments", "groups"
   add_foreign_key "payments", "users", column: "payer_id"
 end

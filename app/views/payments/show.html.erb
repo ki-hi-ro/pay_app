@@ -4,7 +4,6 @@
 
 <div>
   <%= link_to "編集", edit_payment_path(@payment) %> |
-  <%= link_to "支払い履歴", payments_path %>
-
-  <%= button_to "削除", @payment, method: :delete %>
+  <%= link_to "支払い履歴", payments_path %> |
+  <%= link_to "削除", payment_path(@payment), method: :delete, data: { turbo_method: :delete, confirm: "本当に削除しますか？" } %>
 </div>
