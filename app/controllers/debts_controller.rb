@@ -29,6 +29,11 @@ class DebtsController < ApplicationController
   def edit
   end
 
+  # GET /payments/:id/debts/edit
+  def edit_for_payment
+    @payment = Payment.includes(debts: :from_user).find(params[:id])
+  end
+
   # POST /debts or /debts.json
   def create
     @debt = Debt.new(debt_params)

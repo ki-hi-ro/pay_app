@@ -4,11 +4,16 @@ Rails.application.routes.draw do
   post   '/login',  to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  # 支払い・借金
-  resources :payments
+  # 支払い・返済
+  resources :payments do
+    member do
+      get 'debts/edit', to: 'debts#edit_for_payment', as: :edit_debts
+    end
+  end
+
   resources :debts do
     collection do
-      get 'for_me'  # 自分が返すべき借金
+      get 'for_me'
     end
   end
 

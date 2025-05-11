@@ -14,4 +14,10 @@
       <li><%= debt.from_user.name %>さん（¥<%= number_with_delimiter(debt.amount.to_i) %>）</li>
     <% end %>
   </ul>
+
+  <p>
+    <%= link_to "返済登録", edit_debts_payment_path(payment) %> |
+    <%= link_to "編集", edit_payment_path(payment) %> |
+    <%= link_to "削除", payment_path(payment), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+  </p>
 </div>

@@ -1,13 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>支払い履歴</h1>
 
 <div id="payments">
   <% @payments.each do |payment| %>
     <%= render payment %>
-    <p>
-      <%= link_to "詳細", payment %>
-    </p>
   <% end %>
 </div>
 

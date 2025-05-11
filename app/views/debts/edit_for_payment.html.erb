@@ -1,0 +1,11 @@
+<h2><%= @payment.description %> の返済登録</h2>
+
+<% @payment.debts.each do |debt| %>
+  <%= form_with(model: debt, local: true, method: :patch) do |f| %>
+    <p>
+      <%= debt.from_user.name %>さん（¥<%= number_with_delimiter(debt.amount.to_i) %>）：
+      <%= f.check_box :paid %> 返済済み
+      <%= f.submit "更新" %>
+    </p>
+  <% end %>
+<% end %>
