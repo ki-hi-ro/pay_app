@@ -1,8 +1,7 @@
 <%= form_with(model: payment) do |form| %>
   <% if payment.errors.any? %>
-    <div style="color: red">
+    <div style="color: red; margin-bottom: 1.5em;">
       <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
-
       <ul>
         <% payment.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,14 +10,14 @@
     </div>
   <% end %>
 
-  <div>
+  <div style="margin-bottom: 1.5em;">
     <%= form.label :payer_id, "支払った人", style: "display: block" %>
     <%= form.collection_select :payer_id, User.all, :id, :name, { prompt: "選択してください" }, { id: "payer_select" } %>
   </div>
 
-  <div>
+  <div style="margin-bottom: 1.5em;">
     <%= form.label :debtor_ids, "返済する人", style: "display: block" %>
-    <div style="display: flex; flex-wrap: wrap; gap: 1em;">
+    <div style="display: flex; flex-wrap: wrap; gap: 1em; margin-top: 0.5em;">
       <% User.all.each do |user| %>
         <div style="display: flex; align-items: center;">
           <%= check_box_tag "payment[debtor_ids][]", user.id, false, id: "debtor_#{user.id}", class: "debtor_checkbox" %>
@@ -28,17 +27,17 @@
     </div>
   </div>
 
-  <div>
-    <%= form.label :amount, style: "display: block" %>
+  <div style="margin-bottom: 1.5em;">
+    <%= form.label :amount, "支払額", style: "display: block" %>
     <%= form.number_field :amount %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
+  <div style="margin-bottom: 1.5em;">
+    <%= form.label :description, "支払い内容", style: "display: block" %>
     <%= form.text_area :description, rows: 4, cols: 60 %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div style="margin-top: 1em;">
+    <%= form.submit "登録する", class: "btn btn-primary" %>
   </div>
 <% end %>
