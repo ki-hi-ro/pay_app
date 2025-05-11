@@ -1,5 +1,9 @@
 <h1>支払い履歴</h1>
 
+<% if notice.present? %>
+  <p style="color: green;"><%= notice %></p>
+<% end %>
+
 <div id="payments">
   <% @payments.each do |payment| %>
     <%= render payment %>

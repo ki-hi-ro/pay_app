@@ -23,8 +23,14 @@
   </ul>
 
   <p>
-    <%= link_to "返済登録", edit_debts_payment_path(payment) %> |
+    返済操作:
+    <%= link_to "返済登録", edit_debts_payment_path(payment) %>
+  </p>
+
+  <p>
+    支払い管理:
     <%= link_to "編集", edit_payment_path(payment) %> |
     <%= link_to "削除", payment_path(payment), method: :delete, data: { confirm: "本当に削除しますか？" } %>
   </p>
+
 </div>

@@ -53,14 +53,22 @@ class DebtsController < ApplicationController
   def update
     respond_to do |format|
       if @debt.update(debt_params)
-        format.html { redirect_to @debt, notice: "返済状況の更新に成功しました。" }
+        format.html { redirect_to payments_path, notice: "返済状況を更新しました。" }
         format.json { render :show, status: :ok, location: @debt }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @debt.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end  
+
+  def update_multiple
+    params[:debts].each do |id, attributes|
+      debt = Debt.find(id)
+      debt.update(attributes.permit(:paid))
+    end
+    redirect_to payments_path, notice: "返済状況を更新しました。"
+  end  
 
   # DELETE /debts/1 or /debts/1.json
   def destroy

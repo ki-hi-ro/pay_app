@@ -1,13 +1,16 @@
 <h2><%= @payment.description %> の返済登録</h2>
 
-<% @payment.debts.each do |debt| %>
-  <%= form_with(model: debt, local: true, method: :patch) do |f| %>
+<%= form_with url: update_debts_payment_path(@payment), method: :patch, local: true do %>
+  <% @payment.debts.each do |debt| %>
+    <% checkbox_id = "debt_#{debt.id}_paid" %>
     <p>
       <%= debt.from_user.name %>さん（¥<%= number_with_delimiter(debt.amount.to_i) %>）：
-      <%= f.check_box :paid %> 返済済み
-      <%= f.submit "更新" %>
+      <%= check_box_tag "debts[#{debt.id}][paid]", "1", debt.paid, id: checkbox_id %>
+      <%= label_tag checkbox_id, "返済済み" %>
     </p>
   <% end %>
+
+  <%= submit_tag "返済状況を更新", class: "btn btn-primary" %>
 <% end %>
 
 <p>

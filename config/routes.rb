@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :payments do
     member do
       get 'debts/edit', to: 'debts#edit_for_payment', as: :edit_debts
+      patch 'debts/update_multiple', to: 'debts#update_multiple', as: :update_debts
     end
   end
 
