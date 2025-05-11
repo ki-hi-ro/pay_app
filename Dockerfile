@@ -24,7 +24,9 @@ RUN gem update --system 3.4.10 && \
     git \
     libpq-dev \
     libvips \
-    pkg-config
+    pkg-config \
+    libxml2-dev \
+    libxslt-dev
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
