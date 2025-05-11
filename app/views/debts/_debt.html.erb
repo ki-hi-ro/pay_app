@@ -1,16 +1,16 @@
 <div id="<%= dom_id debt %>">
   <p>
-    <strong>立て替え項目:</strong>
-    <%= debt.payment_id %>
+    <strong>支払い項目:</strong>
+    <%= debt.payment.description %>
   </p>
 
   <p>
-    <strong>立て替えてくれた人:</strong>
+    <strong>支払った人:</strong>
     <%= debt.to_user.name %>
   </p>
 
   <p>
-    <strong>立て替えてもらった人:</strong>
+    <strong>返済する人:</strong>
     <%= debt.from_user.name %>
   </p>
 
@@ -20,12 +20,12 @@
   </p>
 
   <p>
-    <strong>支払い状況:</strong>
+    <strong>返済状況:</strong>
     <%= debt.paid %>
   </p>
 
   <p>
-    <strong>支払い予定日:</strong>
+    <strong>返済予定日:</strong>
     <%= debt.due_date %>
   </p>
 
