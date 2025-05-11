@@ -6,21 +6,19 @@ class Payment < ApplicationRecord
 
   after_create :generate_debts
 
-  private
-
   def generate_debts
     return if debtor_ids.nil?
 
     selected_debtor_ids = debtor_ids.reject(&:blank?).map(&:to_i)
 
-    # 自分自身を除外（再発防止）
+    # 支払者本人を除外
     selected_debtor_ids -= [payer.id]
 
     return if selected_debtor_ids.empty?
-  
-    total_people_count = selected_debtor_ids.size + 1  # 支払者を含めた人数
-    share = (amount.to_f / total_people_count).round(0)  # 小数も含めて割り、四捨五入
-  
+
+    total_people_count = selected_debtor_ids.size + 1  # 支払者含む
+    share = (amount.to_f / total_people_count).round(0)
+
     selected_debtor_ids.each do |user_id|
       debts.create!(
         from_user_id: user_id,

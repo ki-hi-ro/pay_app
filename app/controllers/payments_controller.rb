@@ -39,8 +39,15 @@ class PaymentsController < ApplicationController
 
   # PATCH/PUT /payments/1 or /payments/1.json
   def update
+    @payment.assign_attributes(payment_params)
+    @payment.debtor_ids = params[:payment][:debtor_ids]
+  
+    # 既存の debt を全削除（再生成のため）
+    @payment.debts.destroy_all
+    @payment.generate_debts # ← 必要に応じて再生成処理
+  
     respond_to do |format|
-      if @payment.update(payment_params)
+      if @payment.save
         format.html {
           redirect_to payments_path, status: :see_other, notice: "支払いが更新されました。"
         }
@@ -50,7 +57,7 @@ class PaymentsController < ApplicationController
         format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end  
 
   # DELETE /payments/1 or /payments/1.json
   def destroy
