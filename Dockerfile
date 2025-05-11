@@ -51,14 +51,14 @@ RUN apt-get update -qq && \
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
+# 👇 entrypoint.sh を追加
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
+
 # 👇 railsユーザー追加
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER rails:rails
-
-# 👇 entrypoint.sh を追加
-COPY entrypoint.sh /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/entrypoint.sh
 
 # 👇 Entrypoint を差し替え
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
