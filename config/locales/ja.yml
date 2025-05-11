@@ -6,8 +6,8 @@ ja:
       payment:
         group: グループ        # ✅ バリデーションエラー用
         payer: 立て替えた人    # ✅ バリデーションエラー用
-        amount: 金額
-        description: 内容
+        amount: 支払額
+        description: 支払い内容
 
   helpers:
     submit:

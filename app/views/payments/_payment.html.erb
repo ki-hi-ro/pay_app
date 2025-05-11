@@ -1,5 +1,15 @@
 <div id="<%= dom_id payment %>">
   <p>
+    <strong>支払い項目:</strong>
+    <%= payment.description %>
+  </p>
+
+  <p>
+    <strong>支払い金額:</strong>
+    <td><%= "¥#{number_with_delimiter(payment.amount.to_i)}" %></td>
+  </p>
+
+  <p>
     <strong>支払った人:</strong>
     <%= payment.payer.name %>
   </p>
@@ -8,15 +18,4 @@
     <strong>返済する人:</strong>
     <%= payment.debts.map { |d| d.from_user.name }.join(", ") %>
   </p>
-
-  <p>
-    <strong>金額:</strong>
-    <td><%= "¥#{number_with_delimiter(payment.amount.to_i)}" %></td>
-  </p>
-
-  <p>
-    <strong>項目:</strong>
-    <%= payment.description %>
-  </p>
-
 </div>
