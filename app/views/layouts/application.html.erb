@@ -10,6 +10,10 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to "Payments", payments_path %> |
+      <%= link_to "Debts", debts_path %>
+    </nav>    
     <%= yield %>
   </body>
 </html>
