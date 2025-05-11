@@ -3,7 +3,7 @@ class DebtsController < ApplicationController
 
   # GET /debts or /debts.json
   def index
-    @debts = Debt.all
+    @debts = Debt.includes(:from_user, :to_user).order(:due_date)
   end
 
   # GET /debts/1 or /debts/1.json
