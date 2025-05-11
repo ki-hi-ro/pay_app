@@ -11,7 +11,14 @@
 
   <ul>
     <% payment.debts.each do |debt| %>
-      <li><%= debt.from_user.name %>さん（¥<%= number_with_delimiter(debt.amount.to_i) %>）</li>
+      <li>
+        <% if debt.paid? %>
+          <span style="color: green;">✔️</span>
+        <% else %>
+          <span style="color: red;">❌</span>
+        <% end %>
+        <%= debt.from_user.name %>さん（¥<%= number_with_delimiter(debt.amount.to_i) %>）
+      </li>
     <% end %>
   </ul>
 
