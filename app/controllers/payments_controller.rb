@@ -23,17 +23,19 @@ class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(payment_params)
     @payment.debtor_ids = params[:payment][:debtor_ids]
-
+  
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to @payment, notice: "新しい支払いが登録されました。" }
+        format.html {
+          redirect_to payments_path, notice: "新しい支払いが登録されました。"
+        }
         format.json { render :show, status: :created, location: @payment }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end  
 
   # PATCH/PUT /payments/1 or /payments/1.json
   def update
