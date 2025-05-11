@@ -1,17 +1,16 @@
 # app/controllers/sessions_controller.rb
 class SessionsController < ApplicationController
   def new
-    @users = User.all
   end
 
   def create
-    user = User.find(params[:user_id])
+    user = User.find_or_create_by(name: params[:name])
     session[:user_id] = user.id
-    redirect_to debts_path, notice: "#{user.name} としてログインしました"
+    redirect_to payments_path, notice: "ログインしました"
   end
 
   def destroy
-    session.delete(:user_id)
+    session[:user_id] = nil
     redirect_to login_path, notice: "ログアウトしました"
   end
 end
