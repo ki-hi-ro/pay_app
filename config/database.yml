@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: pay_app_production
-  username: pay_app
-  password: <%= ENV["PAY_APP_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
